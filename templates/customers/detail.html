@@ -1,0 +1,132 @@
+{% extends 'layout.html' %} {% load static %} 
+
+{% block title %} Customer Info {%endblock %} 
+
+{% block body %}
+
+<section>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-lg-12 mt-md-5">
+        <div class="card card-printable">
+          <div class="card-head style-primary">
+            <header>Customer Details</header>
+            <div class="tools">
+              <div class="btn-group">
+                <a
+                  class="btn btn-floating-action btn-primary"
+                  href="javascript:void(0);"
+                  onclick="javascript:window.print();"
+                  ><i class="md md-print"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <!--end .card-head -->
+          <div class="card-body style-default-bright" id="print">
+            <!-- BEGIN DETAIL HEADER -->
+            <div class="row">
+              <h4 class="text-danger">{{ customer.name }}</h4>
+            </div>
+            <!--end .row -->
+            <!-- END INVOICE HEADER -->
+
+            <!-- BEGIN CUSTOMER DESCRIPTION -->
+            <div class="col-md-4">
+              <div class="well">
+                <div class="clearfix">
+                  <div class="pull-left">Join Date :</div>
+                  <div class="pull-right">{{ customer.join_date }}</div>
+                </div>
+                <div class="clearfix">
+                  <div class="pull-left">Sex :</div>
+                  <div class="pull-right">{{ customer.sex }}</div>
+                </div>
+                <div class="clearfix">
+                  <div class="pull-left">Phone :</div>
+                  <div class="pull-right">{{ customer.phone }}</div>
+                </div>
+                <div class="clearfix">
+                  <div class="pull-left">Email :</div>
+                  <div class="pull-right">{{ customer.email }}</div>
+                </div>
+                <div class="clearfix">
+                  <div class="pull-left">Address :</div>
+                  <div class="pull-right">{{ customer.address }}</div>
+                </div>
+              </div>
+            </div>
+            <!--end .col -->
+
+            <!-- END CUSTOMER DESCRIPTION -->
+
+            <!-- BEGIN PURCHASE HISTORY -->
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <h4 class="text-danger">Purchase History</h4>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th style="width: 140px" class="text-center">DATE</th>
+                      <th class="text-left">ORDER ID</th>
+                      <th style="width: 140px" class="text-right">STATUS</th>
+                      <th style="width: 90px" class="text-right">TOTAL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for order in customer.previous_orders.all %}
+                    <tr>
+                      <td class="text-center">{{ order.create_datetime }}</td>
+                      <td>
+                        {{ order.order_id }}
+                        <a href="" class="btn btn-sm btn-info text-white"
+                          >View Order
+                          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                      </td>
+                      <td class="text-right">{{ order.status }}</td>
+                      <td class="text-right">HKD {{ order.total_amount }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                      <td colspan="2" rowspan="4"></td>
+                      <td class="text-right"><strong>Subtotal</strong></td>
+                      <td class="text-right">HKD</td>
+                    </tr>
+                    <tr>
+                      <td class="text-right hidden-border">
+                        <strong>VAT</strong>
+                      </td>
+                      <td class="text-right hidden-border">$0.00</td>
+                    </tr>
+                    <tr>
+                      <td class="text-right">
+                        <strong class="text-lg text-accent">Total</strong>
+                      </td>
+                      <td class="text-right">
+                        <strong class="text-lg text-accent"
+                          >HKD {{ customer.amount }}</strong
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!--end .col -->
+            </div>
+            <!--end .row -->
+            <!-- END PURCHASE HISOTRY -->
+          </div>
+          <!--end .row -->
+        </div>
+      </div>
+      <!--end .card-body -->
+    </div>
+    <!--end .card -->
+  </div>
+  <!--end .col -->
+  <!--end .row -->
+
+  <!--end .section-body -->
+</section>
+{% endblock %}

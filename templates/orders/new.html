@@ -1,0 +1,105 @@
+{% extends 'layout.html' %} {% load widget_tweaks %} 
+{% block title %} New Orders {% endblock %} 
+{% block body %}
+
+<section>
+  <div class="section-body">
+    <div class="row">
+      <!-- BEGIN  - FORM -->
+      <div class="col-lg-12 mt-md-5">
+        <div class="card">
+          <div class="card-head style-primary">
+            <header>Add Order</header>
+          </div>
+          <div class="card-body">
+            <form class="form" role="form" action="" method="post">
+              {% csrf_token %} {{ items.management_form }}
+              <div class="row">
+                <h3 class="text-danger">Order Info</h3>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    {{ form.customer | add_class:'form-control' }}
+                    <label for="regular2">Customer Name</label>
+                  </div>
+                  <div class="form-group">
+                    {{ form.channel | add_class:'form-control' }}
+                    <label for="regular2">Sales Channel</label>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    {{ form.status | add_class:'form-control' }}
+                    <label for="regular2">Status</label>
+                  </div>
+                  <div class="form-group">
+                    {{ form.projected_completed_date | add_class:'form-control'}}
+                    <label for="regular2">Projected Completed Date</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <h3 class="text-danger">Order Items</h3>
+                {% for item in items %}
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    {{ item.product | add_class:'form-control' }}
+                    <label for="regular2">Product</label>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    {{ item.quantity | add_class:'form-control'}}
+                    <label for="regular2">Quantity</label>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              <div class="row">
+                <h3 class="text-danger">Payment</h3>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    {{ form.extra_charge | add_class:'form-control'}}
+                    <label for="regular2">Extra Charge (HKD)</label>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    {{ form.discount | add_class:'form-control'}}
+                    <label for="regular2">Discount (HKD)</label>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    {{ form.payment_method | add_class:'form-control'}}
+                    <label for="regular2">Payment Method</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card-actionbar-row">
+                    <a class="btn btn-secondary text-light"href="{% url 'orders_home' %}">Back</a>
+                    <input
+                      type="submit"
+                      class="btn btn-primary"
+                      value="SUBMIT"
+                    />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!--end .card-body -->
+        </div>
+        <!--end .card -->
+      </div>
+      <!--end .col -->
+      <!-- END FORM - TIME ON SITE -->
+    </div>
+    <!--end .row -->
+  </div>
+  <!--end .section-body -->
+</section>
+
+{% endblock %}

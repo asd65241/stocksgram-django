@@ -1,0 +1,80 @@
+{% extends 'layout.html' %} {% block title %} All Products {% endblock %} 
+{% block body %}
+<section>
+  <div class="section-body">
+    <!-- BEGIN DATATABLE 2 -->
+    <div class="row">
+      <div class="col-lg-12 mt-md-5">
+        <div class="card">
+          <div class="card-head style-primary">
+            <header>All Catagories</header>
+            <div class="tools">
+              <div class="btn-group" role="group">
+                <button
+                  id="product-toolbox"
+                  type="button"
+                  class="btn btn-light dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  New
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="product-toolbox">
+                  <li><a class="dropdown-item" href="{% url 'product_new'%}">New Product</a></li>
+                  <li><a class="dropdown-item" href="{% url 'product_cat_new'%}">New Catagory</a></li>
+                  <li><a class="dropdown-item" href="{% url 'product_brand_new'%}">New Brand</a></li>
+                  <li><a class="dropdown-item" href="{% url 'products_upload'%}">Batch Upload</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id="datatable2" class="table order-column hover">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>No. Product</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for cat in cats %}
+                  <tr class="gradeX">
+                    <td>{{ cat.name }}</td>
+                    <td>{{ cat.num_products }}</td>
+                    <td>
+                      <a
+                        href="{% url 'product_cat_detail' cat.id %}"
+                        class="btn ink-reaction btn-floating-action text-light btn-primary"
+                        ><i class="fa fa-info"></i>
+                      </a>
+                      <a
+                        href="{% url 'product_cat_edit' cat.id %}"
+                        class="btn ink-reaction btn-floating-action text-light btn-info"
+                        ><i class="fa fa-edit"></i>
+                      </a>
+                      <a
+                        href="{% url 'product_cat_delete' cat.id %}"
+                        class="btn ink-reaction btn-floating-action text-light btn-danger"
+                        onclick="return confirm('Are you sure you want to delete this?')"
+                        ><i class="fa fa-trash"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <!--end .table-responsive -->
+          </div>
+        </div>
+      </div>
+      <!--end .col -->
+    </div>
+    <!--end .row -->
+    <!-- END DATATABLE 2 -->
+  </div>
+  <!--end .section-body -->
+</section>
+{% endblock %}

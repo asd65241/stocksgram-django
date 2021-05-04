@@ -1,0 +1,182 @@
+{% extends 'layout.html' %} {% load static %} {% block title %} Print Order
+{%endblock %} {% block body %}
+
+<section>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-lg-12 mt-md-5">
+        <div class="card card-printable style-default-light">
+          <div class="card-head">
+            <div class="tools">
+              <div class="btn-group">
+                <a
+                  class="btn btn-floating-action btn-primary"
+                  href="javascript:void(0);"
+                  onclick="javascript:window.print();"
+                  ><i class="md md-print"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <!--end .card-head -->
+          <div class="card-body style-default-bright" id="print">
+            <!-- BEGIN INVOICE HEADER -->
+            <div class="row">
+              <!--<div class="col-xs-2">
+												<img src="{% static 'img/django_logo.png' %}" class="invoice_logo" width="100%">
+											</div>-->
+              <div class="col-xs-8">
+                <h1 class="text-danger" style="margin-top: 0px; color: #f70b0b">
+                  Stocksgram
+                  <strong class="text-accent-dark" style="color: #1ab394"
+                    >Wellsky</strong
+                  >
+                </h1>
+                <p>Company address, Road: xx<br />Dhaka 12xx</p>
+              </div>
+              <div class="col-xs-4 text-right">
+                <h1 class="text-danger text-default-light">Invoice</h1>
+              </div>
+            </div>
+            <!--end .row -->
+            <!-- END INVOICE HEADER -->
+
+            <br />
+
+            <!-- BEGIN INVOICE DESCRIPTION -->
+            <div class="row">
+              <div class="col-xs-4">
+                <address>
+                  <h4 class="text-dark">{{ order.customer.name }}</h4>
+				  <h6 class="text-dark">Email: {{ order.customer.email }}</h6>
+                  <h6 class="text-dark">Phone: {{ order.customer.phone }}</h6>
+                </address>
+              </div>
+              <!--end .col -->
+
+
+              <div class="col-md-5">
+                <h6> Order Number: {{ order.order_id }}</h6>
+				<h6> Order Create Date: {{ order.create_datetime }}</h6>
+				{% if order.status == 'Completed'%}
+				<h6>Order Completed Date: {{ order.completed_date }}</h6>
+				{% else %}
+				<h6>Projected Order Complete Date: {{ order.projected_completed_date }}</h6>
+				{% endif %}
+              </div>
+              <!--end .col -->
+            </div>
+            <!--end .row -->
+            <!-- END INVOICE DESCRIPTION -->
+
+            <br />
+
+            <!-- BEGIN INVOICE PRODUCTS -->
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="text-center" width="20px;">ID</th>
+                      <th class="text-left">PRODUCT</th>
+                      <th class="text-center" width="60px;">QUANTITY</th>
+                      <th class="text-center" style="white-space: nowrap">
+                        UNIT PRICE
+                      </th>
+                      <th class="text-left">SUBTOTAL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in order.order_items.all %}
+                    <tr>
+                      <td class="text-center">{{forloop.counter}}</td>
+                      <td class="text-left">
+                        {{ item.product.product.brand }} -
+                        {{item.product.product.name }}
+                      </td>
+                      <td class="text-center">{{ item.quantity }}</td>
+                      <td class="text-left" style="white-space: nowrap">
+                        HKD {{ item.unit_price }}
+                      </td>
+                      <td class="text-left" style="white-space: nowrap">
+                        HKD {{ item.total_amount }}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                      <td colspan="3" rowspan="5">
+                        <h3 class="text-danger opacity-80">Remark</h3>
+                        <p>
+                          <small
+                            ><ul><li>123</li><li>123</li><li>123</li></ul></small
+                          >
+                        </p>
+                        <p>
+                          <strong>Recvied By __________________</strong>
+                        </p>
+                      </td>
+                      <td class="text-right"><strong>Subtotal</strong></td>
+                      <td class="text-right" style="white-space: nowrap">
+                        HKD {{ item_total.total_amount__sum }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        class="text-right hidden-border"
+                        style="white-space: nowrap"
+                      >
+                        <strong>Extra Charge</strong>
+                      </td>
+                      <td class="text-right hidden-border">
+                        {% if order.extra_charge == None %} None {% else %}
+                        HKD {{ order.extra_charge }} {% endif %}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-right hidden-border">
+                        <strong>Discount</strong>
+                      </td>
+                      <td class="text-right hidden-border">
+                        {% if order.discount == None %} None {% else %} HKD -{{order.discount }} {% endif %}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-right hidden-border">
+                        <strong>Payment Charge</strong>
+                      </td>
+                      <td class="text-right hidden-border">
+                        {{order.payment_method }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-right">
+                        <strong class="text-lg text-accent">Total</strong>
+                      </td>
+                      <td class="text-right">
+                        <strong
+                          class="text-lg text-accent"
+                          style="white-space: nowrap"
+                          >HKD {{ order.total_amount }}</strong
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!--end .col -->
+            </div>
+            <!--end .row -->
+            <!-- END INVOICE PRODUCTS -->
+          </div>
+          <!--end .card-body -->
+        </div>
+        <!--end .card -->
+      </div>
+      <!--end .col -->
+    </div>
+    <!--end .row -->
+  </div>
+  <!--end .section-body -->
+</section>
+
+{% endblock %}

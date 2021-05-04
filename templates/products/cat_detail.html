@@ -1,0 +1,75 @@
+{% extends 'layout.html' %} {% load static %} {% block title %} Brand Detail
+{%endblock %} {% block body %}
+
+<section>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-lg-12 mt-md-5">
+        <div class="card card-printable">
+          <div class="card-head style-primary">
+            <header>Catagory Detail - {{ cat.name }}</header>
+            <div class="tools">
+              <div class="btn-group">
+                <a
+                  class="btn btn-floating-action btn-primary"
+                  href="javascript:void(0);"
+                  onclick="javascript:window.print();"
+                  ><i class="md md-print"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <!--end .card-head -->
+          <div class="card-body style-default-bright" id="print">
+            <!-- BEGIN PURCHASE HISTORY -->
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <h4 class="text-danger">Products</h4>
+                <table id="datatable2" class="table order-column hover">
+                  <thead>
+                    <tr>
+                      <th class="text-left">BARCODE</th>
+                      <th class="text-left">BRAND</th>
+                      <th class="text-left">NAME</th>
+                      <th class="text-left">CATAGORY</th>
+                      <th class="text-left">DETAIL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for product in cat.product_cat.all %}
+                    <tr>
+                      <td class="text-left">{{ product.barcode }}</td>
+                      <td class="text-left">{{ product.brand }}</td>
+                      <td class="text-left">{{ product.name }}</td>
+                      <td class="text-left">{{ product.catagory }}</td>
+                      <td class="text-left">
+                        <a
+                          href="{% url 'product_detail' product.id %}"
+                          class="btn btn-sm btn-info text-white"
+                          >View Detail
+                          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!--end .col -->
+            </div>
+            <!--end .row -->
+            <!-- END PURCHASE HISOTRY -->
+          </div>
+          <!--end .row -->
+        </div>
+      </div>
+      <!--end .card-body -->
+    </div>
+    <!--end .card -->
+  </div>
+  <!--end .col -->
+  <!--end .row -->
+
+  <!--end .section-body -->
+</section>
+{% endblock %}

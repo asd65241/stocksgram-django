@@ -1,0 +1,31 @@
+@media print {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  @page {
+    size: A4 landscape;
+    margin: 0mm;
+  }
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    visibility: hidden;
+  }
+
+  #print {
+    visibility: visible;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    border: none;
+    padding: 20px;
+    margin: 0px;
+  }
+}

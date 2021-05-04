@@ -1,0 +1,57 @@
+/* System Fonts as used by GitHub */
+body {
+  font-family: AvenirNextLTW02-Medium, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol;
+}
+
+.text-gradient {
+  background: #23b6ff; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #0085ff,
+    #cc42c5
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #0085ff,
+    #cc42c5
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+html,body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: #b4f2ff;
+  background: -webkit-linear-gradient(top left, #b4f2ff, #ffb4fd);
+  background: -moz-linear-gradient(top left, #b4f2ff, #ffb4fd);
+  background: linear-gradient(to bottom right, #b4f2ff, #ffb4fd);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.login-card {
+  width: 400px;
+  border-radius: 15px;
+  padding: 10vh 0;
+}
+
+.login-form{
+  max-width: 300px;
+  margin: auto;
+}
+
+.badge-no-round{
+  border-radius: 0px !important;
+}

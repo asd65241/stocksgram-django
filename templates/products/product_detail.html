@@ -1,0 +1,105 @@
+{% extends 'layout.html' %} {% load static %} 
+
+{% block title %} Product Detail {%endblock %} 
+
+{% block body %}
+
+<section>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-lg-12 mt-md-5">
+        <div class="card card-printable">
+          <div class="card-head style-primary">
+            <header>Product Detail</header>
+            <div class="tools">
+              <div class="btn-group">
+                <a
+                  class="btn btn-floating-action btn-primary"
+                  href="javascript:void(0);"
+                  onclick="javascript:window.print();"
+                  ><i class="md md-print"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <!--end .card-head -->
+          <div class="card-body style-default-bright" id="print">
+            <!-- BEGIN DETAIL HEADER -->
+            <div class="row">
+              <h4 class="text-danger">{{ product.name }}</h4>
+            </div>
+            <!--end .row -->
+            <!-- END INVOICE HEADER -->
+
+            <!-- BEGIN CUSTOMER DESCRIPTION -->
+            <div class="col-md-4">
+              <div class="well">
+                <div class="clearfix">
+                  <div class="pull-left">Barcode</div>
+                  <div class="pull-right">{{ product.barcode }}</div>
+                </div>
+                <div class="clearfix">
+                  <div class="pull-left">Brand</div>
+                  <div class="pull-right">{{ product.brand }}</div>
+                </div>
+                <div class="clearfix">
+                  <div class="pull-left">Catagory :</div>
+                  <div class="pull-right">{{ product.catagory }}</div>
+                </div>
+                <div class="clearfix">
+                  <div class="pull-left">Number of Sold :</div>
+                  <div class="pull-right">Null</div>
+                </div>
+              </div>
+            </div>
+            <!--end .col -->
+
+            <!-- END CUSTOMER DESCRIPTION -->
+
+            <!-- BEGIN PURCHASE HISTORY -->
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <h4 class="text-danger">Product Inventory <a href="{% url 'product_addstock' product.id %}"class="mt-1 mb-1 btn btn-sm text-light bg-primary">Add Stock</a></h4>
+                <table id="datatable2" class="table order-column hover">
+                  <thead>
+                    <tr>
+                      <th class="text-left">STORAGE</th>
+                      <th class="text-left">STOCK UNIT</th>
+                      <th class="text-left">PRICE</th>
+                      <th class="text-left">COST</th>
+                      <th class="text-left">EXPIRY DATE</th>
+                      <th class="text-left">REMARK</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for stock in product.product_stock.all %}
+                    <tr>
+                      <td class="text-left">{{ stock.storage }}</td>
+                      <td class="text-left">{{ stock.stock_unit }}</td>
+                      <td class="text-left">HKD {{ stock.price }}</td>
+                      <td class="text-left">{% if stock.cost == None%} {{stock.cost}} {% else %} HKD {{stock.cost}} {% endif %}</td>
+                      <td class="text-left">{{ stock.expiry_date }}</td>
+                      <td class="text-left">{{ stock.cost }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!--end .col -->
+            </div>
+            <!--end .row -->
+            <!-- END PURCHASE HISOTRY -->
+          </div>
+          <!--end .row -->
+        </div>
+      </div>
+      <!--end .card-body -->
+    </div>
+    <!--end .card -->
+  </div>
+  <!--end .col -->
+  <!--end .row -->
+
+  <!--end .section-body -->
+</section>
+{% endblock %}
