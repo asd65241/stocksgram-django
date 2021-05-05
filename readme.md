@@ -7,8 +7,8 @@
 
 ## Usage
 
-1. Git the current repository `git https://github.com/asd65241/Stocksgram-FullStack.git`
-2. Go to the folder `cd Stocksgram-FullStack`
+1. Git the current repository `git https://github.com/asd65241/stocksgram-django.git`
+2. Go to the folder `cd stocksgram-django`
 3. Initiate the Python VirtualEnv by `pipenv shell`
 4. Install Python required packages `pip -r requirements.txt`
 5. Run Django Server `python manage.py runserver 0.0.0.0:8000`
